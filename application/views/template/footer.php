@@ -1,10 +1,10 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+      UNIVERSITAS ISLAM NAHDLATUL ULAMA JEPARA
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019. All rights reserved  by<a href="unisnu.ac.id"> UNISNU JEPARA</a>.</strong> 
   </footer>
 
   <!-- Control Sidebar -->
