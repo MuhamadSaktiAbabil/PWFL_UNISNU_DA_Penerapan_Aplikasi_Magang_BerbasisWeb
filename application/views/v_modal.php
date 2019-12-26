@@ -184,21 +184,40 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Table With Full Features</h3>
-              <div class="pull-right"><a href="<?php echo base_url('c_dosen/tambahdosen');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
+              <div class="pull-right"><a class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_add_new"> Tambah</a></div> 
             </div>
 
             <!-- /.box-header -->
             <div class="box-body">
-     <table id="dosen" class="table table-bordered table-striped">
-      <thead>              
-        <tr>
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>              
+                <tr>
 					<th>No.</th>
-					<th>Nama Dosen</th>
+					<th>NIM</th>
+					<th>Nama Mahasiswa</th>
+					<th>Jenis Kelamin</th>
 					<th>Alamat</th>
 					<th>Nomor Hp</th>
+					<th>Belum paham Setingnya</th>
 				</tr>	
 			</thead>
 			
+			<tbody>
+        <?php  $no = 1; foreach ($view as $a ) {?>
+				<tr>
+					<td><?php echo $no++; ?></td>
+					<td><?php echo $a['nim']; ?></td>
+					<td><?php echo $a['nama_mahasiswa']; ?></td>
+					<td><?php echo $a['jenis_kelamin']; ?></td>
+					<td><?php echo $a['alamat']; ?></td>
+					<td><?php echo $a['nomer_hp']; ?></td>
+					<td style="width: 120px;">
+            <a class="btn btn-xs btn-info"> Edit</a>
+            <a class="btn btn-xs btn-danger"> Hapus</a>
+          </td>
+				</tr>
+				<?php  } ?>
+			</tbody>
 		</table>
             </div>
             <!-- /.box-body -->
@@ -219,6 +238,65 @@
     <strong>Copyright &copy; 2019 <a href="unisnu.ac.id">UNISNU</a>.</strong> All rights
     reserved.
   </footer>
+  <!-- ============ MODAL ADD mahasiswa =============== -->
+        <div class="modal fade" id="modal_add_new" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 class="modal-title" id="myModalLabel">Add New mahasiswa</h3>
+            </div>
+            <form class="form-horizontal" method="post" action="<?php echo base_url().'c_mahasiswa/tambahdata'?>">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >NIM mahasiswa</label>
+                        <div class="col-xs-8">
+                            <input name="nim" class="form-control" type="number" placeholder="NIM mahasiswa" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Nama mahasiswa</label>
+                        <div class="col-xs-8">
+                            <input name="nama_mahasiswa" class="form-control" maxlength="20" type="text" placeholder="Nama mahasiswa" required >
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label class="control-label col-xs-3" >Jenis Kelamin</label>
+                        <div class="col-xs-8">
+                            <input name="jenis_kelamin" class="form-control" type="text" maxlength="1" placeholder="P/L" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Alamat</label>
+                        <div class="col-xs-8">
+                            <input name="alamat" class="form-control" type="text" maxlength="20" placeholder="Alamat Lengkap" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Nomor HP</label>
+                        <div class="col-xs-8">
+                            <input name="nomer_hp" class="form-control" type="number" placeholder="Nomor HP" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-info">Simpan</button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+        <!-- TUTP MODAL -->
+
+        
+
 
 
   <!-- Control Sidebar -->
@@ -246,36 +324,18 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 <!-- page script -->
-
-
-<script type="text/javascript">
-    var table;
-    $(document).ready(function() {
-
-        //datatables
-        table = $('#dosen').DataTable({ 
-
-            "processing": true, 
-            "serverSide": true, 
-            "order": [], 
-            
-            "ajax": {
-                "url": "<?php echo site_url('c_dosen/get_data_user')?>",
-                "type": "POST"
-            },
-
-            
-            "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-            ],
-
-        });
-
-    });
-
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 </body>
 </html>

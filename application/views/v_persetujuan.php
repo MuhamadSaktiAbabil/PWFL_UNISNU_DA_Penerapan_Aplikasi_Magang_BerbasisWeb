@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,22 +185,68 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Table With Full Features</h3>
-              <div class="pull-right"><a href="<?php echo base_url('c_dosen/tambahdosen');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
+          
             </div>
 
             <!-- /.box-header -->
             <div class="box-body">
-     <table id="dosen" class="table table-bordered table-striped">
-      <thead>              
-        <tr>
-					<th>No.</th>
-					<th>Nama Dosen</th>
-					<th>Alamat</th>
-					<th>Nomor Hp</th>
-				</tr>	
-			</thead>
-			
-		</table>
+              
+
+<form action="<?php echo base_url().'c_daftar/editdata' ?>" method="post">
+  <?php foreach($peminjaman as $p){ ?>
+  <div class="form-group">
+    <label>Anggota</label>
+    <select class="form-control" name="anggota" disabled>
+      <option value="">-Pilih Anggota-</option>
+      <?php foreach($mahasiswa as $k){ ?>
+        <option <?php if($p->id_mahasiswa == $k->id_mahasiswa){echo "selected='selected'";} ?> value="<?php echo $k->id_mahasiswa; ?>"><?php echo $k->nama_mahasiswa; ?></option>
+      <?php } ?>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Buku</label>
+    <select class="form-control" name="buku" disabled>
+      <option value="">-Pilih Buku-</option>
+      <?php foreach($dosen as $m){ ?>
+      <option <?php if($p->id_dosen == $m->id_dosen){echo "selected='selected'";} ?> value="<?php echo $m->id_dosen; ?>"><?php echo $m->nama_dosen; ?></option>
+      <?php } ?>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Tanggal Pinjam</label>
+    <input class="form-control" type="text" name="nama_kp" value="<?php echo $p->nama_kp ?>" 
+    disabled>
+  </div>
+
+  <div class="form-group">
+    <label>Tanggal Kembali</label>
+    <input class="form-control" type="text" name="alamat_kp" value="<?php echo $p->alamat_kp ?>"disabled>
+  </div>
+
+  <div class="form-group">
+    <label>Harga Denda / Hari</label>
+      <input class="form-control" type="text" name="no_kp" value="<?php echo $p->no_kp ?>">
+  </div>
+
+  <div class="form-group">
+    <label>Tanggal Dikembalikan Oleh Anggota</label>
+    <input class="form-control" type="date" name="tgl_acc">
+    
+    <input type="hidden" name="tgl_pencatatan" value="<?php echo $p->tgl_pencatatan ?>" class="form-control">
+      
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Simpan" class="btn btnprimary btn-sm">
+  </div>
+</form>
+<?php } ?>
+            
+              
+    
+    
+  
             </div>
             <!-- /.box-body -->
           </div>
@@ -246,36 +293,20 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 <!-- page script -->
-
-
-<script type="text/javascript">
-    var table;
-    $(document).ready(function() {
-
-        //datatables
-        table = $('#dosen').DataTable({ 
-
-            "processing": true, 
-            "serverSide": true, 
-            "order": [], 
-            
-            "ajax": {
-                "url": "<?php echo site_url('c_dosen/get_data_user')?>",
-                "type": "POST"
-            },
-
-            
-            "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-            ],
-
-        });
-
-    });
-
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 </body>
+</html>
+
 </html>

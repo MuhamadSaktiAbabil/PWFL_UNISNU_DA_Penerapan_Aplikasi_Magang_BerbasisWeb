@@ -184,21 +184,40 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Table With Full Features</h3>
-              <div class="pull-right"><a href="<?php echo base_url('c_dosen/tambahdosen');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
+              <div class="pull-right"><a href="<?php echo base_url('c_mahasiswa/tambah');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
             </div>
 
             <!-- /.box-header -->
             <div class="box-body">
-     <table id="dosen" class="table table-bordered table-striped">
+     <table id="mahasiswa" class="table table-bordered table-striped">
       <thead>              
         <tr>
 					<th>No.</th>
-					<th>Nama Dosen</th>
-					<th>Alamat</th>
+					<th>NIM</th>
+					<th>Nama Mahasiswa</th>
 					<th>Nomor Hp</th>
+          <th>Alamat</th>
+          <th>Angkatan</th>
+					<th>Aksi</th>
 				</tr>	
 			</thead>
 			
+			<tbody>
+        <?php  $no = 1; foreach ($view as $a ) {?>
+				<tr>
+					<td><?php echo $no++; ?></td>
+					<td><?php echo $a['nim']; ?></td>
+					<td><?php echo $a['nama_mahasiswa']; ?></td>
+					<td><?php echo $a['no_telp']; ?></td>
+          <td><?php echo $a['alamat']; ?></td>
+          <td><?php echo $a['angkatan']; ?></td>
+					<td align="center">
+                <a href="<?php echo base_url('c_mahasiswa/tampiledit/').$a['id_mahasiswa']; ?>"class="btn btn-xs btn-info">Ubah</a>
+                <a href="<?php echo base_url('c_mahasiswa/hapus/').$a['id_mahasiswa']; ?>" class="btn btn-xs btn-danger">Hapus</a>
+          </td>
+				</tr>
+				<?php  } ?>
+			</tbody>
 		</table>
             </div>
             <!-- /.box-body -->
@@ -246,36 +265,17 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 <!-- page script -->
-
-
-<script type="text/javascript">
-    var table;
-    $(document).ready(function() {
-
-        //datatables
-        table = $('#dosen').DataTable({ 
-
-            "processing": true, 
-            "serverSide": true, 
-            "order": [], 
-            
-            "ajax": {
-                "url": "<?php echo site_url('c_dosen/get_data_user')?>",
-                "type": "POST"
-            },
-
-            
-            "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-            ],
-
-        });
-
-    });
-
+<script>
+  $(function () {
+    $('#mahasiswa').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 </body>
 </html>

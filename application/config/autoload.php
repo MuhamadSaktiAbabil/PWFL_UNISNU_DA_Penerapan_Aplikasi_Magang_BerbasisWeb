@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | These are the things you can load automatically:
 |
-| 1. Packagesa
+| 1. Packages
 | 2. Libraries
 | 3. Drivers
 | 4. Helper files
@@ -59,7 +59,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
-$autoload['libraries'] = array('database', 'session');
+$autoload['libraries'] = array('database', 'session','form_validation');
 
 /*
 | -------------------------------------------------------------------
@@ -133,4 +133,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('m_dosen');
+$autoload['model'] = array('m_mahasiswa','m_dosen','mlogin','m_daftar');

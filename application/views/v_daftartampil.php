@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -183,23 +184,47 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
-              <div class="pull-right"><a href="<?php echo base_url('c_dosen/tambahdosen');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
+              <h3 class="box-title"><a href="<?php echo base_url().'c_daftar/tambah'; ?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Pendaftaran</a></h3>
+          
             </div>
 
             <!-- /.box-header -->
             <div class="box-body">
-     <table id="dosen" class="table table-bordered table-striped">
-      <thead>              
-        <tr>
-					<th>No.</th>
-					<th>Nama Dosen</th>
-					<th>Alamat</th>
-					<th>Nomor Hp</th>
-				</tr>	
-			</thead>
-			
-		</table>
+
+<table class="table table-bordered table-striped table-hover" id="daftar">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama Mahasiswa</th>
+        <th>Lokasi KP</th>
+        <th>Alamat</th>
+        <th>No_KP</th>
+        <th>Tanggal Pengajuan</th>
+        <th>Nama Dosen Pendamping</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        $no = 1;
+        foreach($daftar as $p){
+      ?>
+      <tr>
+        <td><?php echo $no++; ?></td>
+        <td><?php echo $p->nama_mahasiswa; ?></td>
+        <td><?php echo $p->nama_kp; ?></td>
+        <td><?php echo $p->alamat_kp; ?></td>
+        <td><?php echo $p->no_kp; ?></td>
+        <td><?php echo $p->tgl_pencatatan ?></td>
+        <td><?php echo $p->nama_dosen; ?></td>
+      </tr>
+    <?php } ?>
+    </tbody>
+  </table>
+            
+              
+    
+    
+  
             </div>
             <!-- /.box-body -->
           </div>
@@ -246,36 +271,20 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 <!-- page script -->
-
-
-<script type="text/javascript">
-    var table;
-    $(document).ready(function() {
-
-        //datatables
-        table = $('#dosen').DataTable({ 
-
-            "processing": true, 
-            "serverSide": true, 
-            "order": [], 
-            
-            "ajax": {
-                "url": "<?php echo site_url('c_dosen/get_data_user')?>",
-                "type": "POST"
-            },
-
-            
-            "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-            ],
-
-        });
-
-    });
-
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#daftar').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 </body>
+</html>
+
 </html>

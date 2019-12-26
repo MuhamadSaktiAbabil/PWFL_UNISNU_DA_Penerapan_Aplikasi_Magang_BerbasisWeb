@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,6 +157,7 @@
         </li>
       </ul>
     </section>
+    
     <!-- /.sidebar -->
   </aside>
 
@@ -184,22 +186,73 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Table With Full Features</h3>
-              <div class="pull-right"><a href="<?php echo base_url('c_dosen/tambahdosen');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
+          
             </div>
 
             <!-- /.box-header -->
             <div class="box-body">
-     <table id="dosen" class="table table-bordered table-striped">
-      <thead>              
-        <tr>
-					<th>No.</th>
-					<th>Nama Dosen</th>
-					<th>Alamat</th>
-					<th>Nomor Hp</th>
-				</tr>	
-			</thead>
+            	<?php foreach ($view as $a ) {?>
+              
+		<form action="<?php echo base_url('c_mahasiswa/editdata'); ?>" method="POST">
+			<div class="modal-body">
+				<div>
+					<input type="hidden" value="<?php echo $a['id_mahasiswa']; ?>" name="id_mahasiswa"></input>
+				</div>
+                   
+				            <div class="form-group">
+				                <label class="control-label col-xs-3" >NIM mahasiswa</label>
+                        <div class="col-xs-8">
+                            <input name="nim" class="form-control" type="number" placeholder="NIM mahasiswa" value="<?php echo $a['nim']; ?>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Nama mahasiswa</label>
+                        <div class="col-xs-8">
+                            <input name="nama_mahasiswa" class="form-control" maxlength="20" type="text" placeholder="Nama mahasiswa" value="<?php echo $a['nama_mahasiswa']; ?>" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Nomor HP</label>
+                        <div class="col-xs-8">
+                            <input name="no_telp" class="form-control" type="number" placeholder="Nomor HP" value="<?php echo $a['no_telp']; ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Alamat</label>
+                        <div class="col-xs-8">
+                            <input name="alamat" class="form-control" type="tect" placeholder="Alamat" value="<?php echo $a['alamat']; ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Jenis Kelamin</label>
+                        <div class="col-xs-8">
+                            <input name="jenis_kelamin" class="form-control" type="text" placeholder="Jenis Kelamin" value="<?php echo $a['jenis_kelamin']; ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Angkatan</label>
+                        <div class="col-xs-8">
+                            <input name="angkatan" class="form-control" type="number" placeholder="Nomor HP" value="<?php echo $a['angkatan']; ?>" required>
+                        </div>
+                    </div>
+
+                    
+				
+				<div class="form-group">
+					<label class="control-label col-xs-3" ></label>
+					<div class="col-xs-8">
+					<input type="submit" value="Simpan" class="btn btn-primary">
+					</div>
+				</div>
 			
-		</table>
+		</div>
+		</form>
+		<?php  } ?>
+	
             </div>
             <!-- /.box-body -->
           </div>
@@ -246,36 +299,20 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 <!-- page script -->
-
-
-<script type="text/javascript">
-    var table;
-    $(document).ready(function() {
-
-        //datatables
-        table = $('#dosen').DataTable({ 
-
-            "processing": true, 
-            "serverSide": true, 
-            "order": [], 
-            
-            "ajax": {
-                "url": "<?php echo site_url('c_dosen/get_data_user')?>",
-                "type": "POST"
-            },
-
-            
-            "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-            ],
-
-        });
-
-    });
-
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 </body>
+</html>
+
 </html>

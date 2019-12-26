@@ -178,27 +178,42 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-         
           <!-- /.box -->
-
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Table With Full Features</h3>
-              <div class="pull-right"><a href="<?php echo base_url('c_dosen/tambahdosen');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
+              
             </div>
 
             <!-- /.box-header -->
             <div class="box-body">
-     <table id="dosen" class="table table-bordered table-striped">
-      <thead>              
-        <tr>
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>              
+                <tr>
 					<th>No.</th>
-					<th>Nama Dosen</th>
-					<th>Alamat</th>
-					<th>Nomor Hp</th>
+          <th>Angkatan</th>
+          <th>Total Mahasiswa</th>
+					<th>Terdaftar</th>
 				</tr>	
 			</thead>
 			
+			<tbody>
+        <?php  $no = 1;?>
+				<tr>
+          <td align="center"><?php echo $no++; ?></td>
+          <td align="center">2019</td>
+          <td align="center" data-toggle="modal" data-target="#modal_sum"><?php echo $sum;?></td>   
+          <td align="center" data-toggle="modal" data-target="#modal_nomor"><?php echo $jumlahm;?></td>  
+       
+				</tr>
+        <tr>
+          <td align="center"><?php echo $no++; ?></td>
+          <td align="center">2020</td>
+          <td align="center" data-toggle="modal" data-target="#modal_sum"><?php echo $sum;?></td>   
+          <td align="center" data-toggle="modal" data-target="#modal_nomor"><?php echo $nomor;?></td>  
+        </tr>
+			
+			</tbody>
 		</table>
             </div>
             <!-- /.box-body -->
@@ -219,6 +234,98 @@
     <strong>Copyright &copy; 2019 <a href="unisnu.ac.id">UNISNU</a>.</strong> All rights
     reserved.
   </footer>
+  <!-- modal banyak mahasiswa -->
+<div class="modal fade" id="modal_sum" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 class="modal-title" id="myModalLabel" align="center">Data Mahasiswa</h3>
+            </div>
+            <table id="mahasiswa" class="table table-bordered table-striped">
+      <thead>              
+        <tr>
+          <th>No.</th>
+          <th>NIM</th>
+          <th>Nama Mahasiswa</th>
+          <th>Nomor Hp</th>
+          <th>Alamat</th>
+          <th>Angkatan</th>
+        
+        </tr> 
+      </thead>
+      
+      <tbody>
+        <?php  $no = 1; foreach ($view as $a ) {?>
+        <tr>
+          <td><?php echo $no++; ?></td>
+          <td><?php echo $a['nim']; ?></td>
+          <td><?php echo $a['nama_mahasiswa']; ?></td>
+          <td><?php echo $a['no_telp']; ?></td>
+          <td><?php echo $a['alamat']; ?></td>
+          <td><?php echo $a['angkatan']; ?></td>
+        
+        </tr>
+        <?php  } ?>
+      </tbody>
+    </table>
+                
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                  
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+        <!-- tutup modal banyak -->
+          <!-- modal banyak mahasiswa -->
+<div class="modal fade bd-example-modal-lg"  id="modal_nomor" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 class="modal-title" id="myModalLabel" align="center">Pendaftar PKN</h3>
+            </div>
+            <table id="jumlah" class="table table-bordered table-striped">
+                <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama Mahasiswa</th>
+        <th>Lokasi KP</th>
+        <th>Alamat</th>
+        <th>No_KP</th>
+        <th>Tanggal Pengajuan</th>
+        <th>Nama Dosen Pendamping</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        $no = 1;
+        foreach($daftar as $p){
+      ?>
+      <tr>
+        <td><?php echo $no++; ?></td>
+        <td><?php echo $p->nama_mahasiswa; ?></td>
+        <td><?php echo $p->nama_kp; ?></td>
+        <td><?php echo $p->alamat_kp; ?></td>
+        <td><?php echo $p->no_kp; ?></td>
+        <td><?php echo $p->tgl_pencatatan ?></td>
+        <td><?php echo $p->nama_dosen; ?></td>
+      </tr>
+    <?php } ?>
+    </tbody>
+  </table>
+                
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                  
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+        <!-- tutup modal banyak -->
 
 
   <!-- Control Sidebar -->
@@ -246,36 +353,26 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 <!-- page script -->
-
-
-<script type="text/javascript">
-    var table;
-    $(document).ready(function() {
-
-        //datatables
-        table = $('#dosen').DataTable({ 
-
-            "processing": true, 
-            "serverSide": true, 
-            "order": [], 
-            
-            "ajax": {
-                "url": "<?php echo site_url('c_dosen/get_data_user')?>",
-                "type": "POST"
-            },
-
-            
-            "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-            ],
-
-        });
-
-    });
-
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#mahasiswa').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+    $('#jumlah').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 </body>
 </html>

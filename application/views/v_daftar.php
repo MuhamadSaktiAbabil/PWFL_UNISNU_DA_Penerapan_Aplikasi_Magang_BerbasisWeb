@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,22 +185,62 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Table With Full Features</h3>
-              <div class="pull-right"><a href="<?php echo base_url('c_dosen/tambahdosen');?>" class="btn btn-sm btn-success">Tambah  </a></div> 
+          
             </div>
 
             <!-- /.box-header -->
             <div class="box-body">
-     <table id="dosen" class="table table-bordered table-striped">
-      <thead>              
-        <tr>
-					<th>No.</th>
-					<th>Nama Dosen</th>
-					<th>Alamat</th>
-					<th>Nomor Hp</th>
-				</tr>	
-			</thead>
-			
-		</table>
+              
+<form action="<?php echo base_url().'c_daftar/daftar' ?>" method="post">
+
+  <div class="form-group">
+    <label>Nama Mahasiswa</label>
+    <select name="id_mahasiswa" class="form-control" required>
+      <option value="">-Pilih Mahasiswa-</option>
+      <?php foreach($mahasiswa as $a){ ?>
+      <option value="<?php echo $a->id_mahasiswa; ?>"><?php echo $a->nama_mahasiswa; ?></option>
+      <?php } ?>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Nama KP</label>
+    <input type="text" name="nama_kp" class="form-control" required placeholder="Nama Lokasi">
+    
+  </div>
+
+  <div class="form-group">
+    <label>alamat KP</label>
+    <input type="text" name="alamat_kp" class="form-control" required placeholder="Alamat Lokasi">
+   
+  </div>
+
+  <div class="form-group">
+    <label>No KP</label>
+    <input type="text" name="no_kp" class="form-control" required placeholder="Nomer Lokasi">
+    <input type="hidden" name="tgl_pencatatan" value="<?php  echo date("Y-m-d H:i:s");?>">
+    <input type="hidden" name="status" value="terdaftar">
+  </div>
+
+  <div class="form-group">
+    <label>Dosen Pembimbing</label>
+    <select name="id_dosen" class="form-control">
+      <option value="">-Pilih Dosen-</option>
+      <?php foreach($dosen as $b){ ?>
+      <option value="<?php echo $b->id_dosen; ?>"><?php echo $b->nama_dosen; ?></option>
+      <?php } ?>
+    </select>
+    
+  </div>
+
+  <div class="form-group">
+    <input type="submit" value="Simpan" class="btn btnprimary btn-sm">
+  </div>
+</form>
+            
+              
+    
+    
+  
             </div>
             <!-- /.box-body -->
           </div>
@@ -246,36 +287,20 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
 <!-- page script -->
-
-
-<script type="text/javascript">
-    var table;
-    $(document).ready(function() {
-
-        //datatables
-        table = $('#dosen').DataTable({ 
-
-            "processing": true, 
-            "serverSide": true, 
-            "order": [], 
-            
-            "ajax": {
-                "url": "<?php echo site_url('c_dosen/get_data_user')?>",
-                "type": "POST"
-            },
-
-            
-            "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-            ],
-
-        });
-
-    });
-
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 </body>
+</html>
+
 </html>

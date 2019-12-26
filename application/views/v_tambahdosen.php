@@ -102,11 +102,13 @@
         <li class="header">MENU</li>
 
         <li>
-          <a href="<?php echo base_url('c_mahasiswa');?>">
+          <a href="<?php echo base_url('c_dashboard');?>">
             <i class="fa fa-fw fa-home"></i> <span>Dashboard</span>
           </a>
         </li>
 
+        
+        <li class="header">FITUR</li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i> <span>Kelola PKN</span>
@@ -115,8 +117,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('c_mahasiswa/mahasiswa');?>"><i class="fa fa-circle-o"></i>Daftar PKN</a></li>
-            <li><a href="<?php echo base_url('c_dosen');?>"><i class="fa fa-circle-o"></i>Bagi Pembimbing PKN</a></li>
+            <li><a href="<?php echo base_url('c_daftar');?>"><i class="fa fa-circle-o"></i>Pendaftaran</a></li>
           </ul>
         </li>
 
@@ -128,10 +129,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('c_mahasiswa/mahasiswa');?>"><i class="fa fa-circle-o"></i>Mahasiswa</a></li>
+            <li><a href="<?php echo base_url('c_mahasiswa');?>"><i class="fa fa-circle-o"></i>Mahasiswa</a></li>
             <li><a href="<?php echo base_url('c_dosen');?>"><i class="fa fa-circle-o"></i>Dosen</a></li>
           </ul>
         </li>
+        <li class="header">REKAP DATA</li>
 
         <li class="treeview">
           <a href="#">
@@ -145,6 +147,7 @@
             <li><a href="<?php echo base_url('c_mahasiswa/rekap');?>"><i class="fa fa-circle-o"></i> Rekap Magang</a></li>
           </ul>
         </li>
+        <li class="header">PENGATURAN</li>
 
         <li>
           <a href="<?php echo base_url('login/logout');?>">
